@@ -2891,6 +2891,7 @@ GameObject:
   - component: {fileID: 1406418403}
   - component: {fileID: 1406418402}
   - component: {fileID: 1406418401}
+  - component: {fileID: 1406418405}
   - component: {fileID: 1406418400}
   - component: {fileID: 1406418399}
   m_Layer: 0
@@ -2915,6 +2916,8 @@ MonoBehaviour:
   waypoints:
   - {fileID: 1681888629}
   - {fileID: 1420035247}
+  vitessePatrouille: 3
+  vitessePoursuite: 6
 --- !u!195 &1406418400
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2959,7 +2962,7 @@ CapsuleCollider:
   m_Radius: 0.5000001
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1406418402
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3031,6 +3034,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &1406418405
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1406418398}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 10
+  m_Height: 5
+  m_Direction: 0
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1420035246
 GameObject:
   m_ObjectHideFlags: 0
@@ -3076,6 +3102,7 @@ GameObject:
   - component: {fileID: 1453727573}
   - component: {fileID: 1453727572}
   - component: {fileID: 1453727571}
+  - component: {fileID: 1453727577}
   m_Layer: 0
   m_Name: Policier 2
   m_TagString: Untagged
@@ -3098,6 +3125,8 @@ MonoBehaviour:
   waypoints:
   - {fileID: 1245414236}
   - {fileID: 873359996}
+  vitessePatrouille: 3
+  vitessePoursuite: 6
 --- !u!195 &1453727572
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3142,7 +3171,7 @@ CapsuleCollider:
   m_Radius: 0.5000001
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1453727574
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3214,6 +3243,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &1453727577
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1453727570}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 10
+  m_Height: 5
+  m_Direction: 0
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1487935746
 GameObject:
   m_ObjectHideFlags: 0
@@ -3549,6 +3601,7 @@ GameObject:
   - component: {fileID: 1674261334}
   - component: {fileID: 1674261333}
   - component: {fileID: 1674261332}
+  - component: {fileID: 1674261338}
   m_Layer: 0
   m_Name: Policier 3
   m_TagString: Untagged
@@ -3571,6 +3624,8 @@ MonoBehaviour:
   waypoints:
   - {fileID: 1915244655}
   - {fileID: 2101114798}
+  vitessePatrouille: 3
+  vitessePoursuite: 6
 --- !u!195 &1674261333
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3615,7 +3670,7 @@ CapsuleCollider:
   m_Radius: 0.5000001
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1674261335
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3687,6 +3742,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &1674261338
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1674261331}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 10
+  m_Height: 5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1675244854
 GameObject:
   m_ObjectHideFlags: 0
