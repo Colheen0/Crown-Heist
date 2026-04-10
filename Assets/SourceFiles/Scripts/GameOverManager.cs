@@ -8,36 +8,27 @@ public class GameOverManager : MonoBehaviour
 
     void Start()
     {
-        // On s'assure que l'écran est caché au début du jeu
         if (gameOverUI != null) gameOverUI.SetActive(false);
     }
 
-    // Cette fonction sera appelée par le policier
     public void TriggerGameOver()
     {
-        gameOverUI.SetActive(true); // Affiche le menu
-        Time.timeScale = 0f;        // 🛑 MET LE JEU EN PAUSE (arrête tout le monde)
-        
-        // Débloque et affiche la souris pour pouvoir cliquer sur les boutons
+        gameOverUI.SetActive(true); 
+        Time.timeScale = 0f;        
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
 
-    // Fonction pour le bouton "Recommencer"
     public void RecommencerNiveau()
     {
-        Time.timeScale = 1f; // 🟢 Retire la pause avant de recharger !
+        Time.timeScale = 1f; 
         
-        // Recharge la scène actuellement ouverte
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-
-    // Fonction pour le bouton "Menu Principal"
     public void RetourMenu()
     {
-        Time.timeScale = 1f; // Retire la pause
+        Time.timeScale = 1f;
         
-        // Charge la scène du menu. IMPORTANT : il faut que ta scène s'appelle exactement "MainMenu" !
         SceneManager.LoadScene("MenuPrincipal"); 
     }
 }

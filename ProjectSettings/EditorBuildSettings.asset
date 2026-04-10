@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/exo_pente/test_cam2.unity
     guid: fabcdfd0a41d43b4e9bac56af685c2d9
   - enabled: 1
+    path: Assets/Scenes/MenuPrincipal.unity
+    guid: 33856bf73380498449145e89902c34e4
+  - enabled: 1
     path: Assets/Scenes/Crown_heist.unity
     guid: f2f2ae8bc472fe94592fc3b4df2d3728
   m_configObjects:
