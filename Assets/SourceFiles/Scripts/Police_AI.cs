@@ -57,23 +57,20 @@ public class PoliceAI : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("HALTE ! Le joueur est repéré !");
-            _isChasing = true;               // On change d'état
-            _targetPlayer = other.transform; // On mémorise qui poursuivre
-            _agent.speed = vitessePoursuite; // Le policier se met à courir !
+            _isChasing = true;               
+            _targetPlayer = other.transform;
+            _agent.speed = vitessePoursuite; 
         }
     }
-
-    // Quand quelqu'un SORT de la grande zone
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             Debug.Log("On l'a perdu... Retour à la ronde.");
-            _isChasing = false;              // On repasse en patrouille
-            _targetPlayer = null;            // On oublie le joueur
-            _agent.speed = vitessePatrouille; // On se remet à marcher calmement
+            _isChasing = false;              
+            _targetPlayer = null;            
+            _agent.speed = vitessePatrouille; 
             
-            // On lui redonne l'ordre d'aller à son point de patrouille actuel
             if (waypoints.Length > 0 && _agent.isOnNavMesh)
             {
                 _agent.SetDestination(waypoints[_currentPointIndex].position);
@@ -81,18 +78,14 @@ public class PoliceAI : MonoBehaviour
         }
     }
 
-    // Quand le collider PHYSIQUE du policier (pas la bulle de vision) touche quelque chose
     private void OnCollisionEnter(Collision collision)
     {
-        // Si la chose qu'il touche a le tag "Player"
         if (collision.gameObject.CompareTag("Player"))
         {
             Debug.Log("Le joueur a été attrapé !");
             
-            // On cherche notre GameManager dans la scène
             GameOverManager manager = FindFirstObjectByType<GameOverManager>();
             
-            // S'il le trouve, on lance la fonction fatale
             if (manager != null)
             {
                 manager.TriggerGameOver();

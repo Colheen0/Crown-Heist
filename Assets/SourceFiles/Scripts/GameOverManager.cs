@@ -1,9 +1,7 @@
 using UnityEngine;
-using UnityEngine.SceneManagement; // OBLIGATOIRE pour recharger les niveaux
-
+using UnityEngine.SceneManagement; 
 public class GameOverManager : MonoBehaviour
 {
-    [Tooltip("Glisse le GameOverPanel ici")]
     public GameObject gameOverUI;
 
     void Start()
