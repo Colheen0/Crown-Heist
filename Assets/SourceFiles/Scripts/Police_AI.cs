@@ -89,4 +89,23 @@ public class PoliceAI : MonoBehaviour
             }
         }
     }
+
+    // Quand le collider PHYSIQUE du policier (pas la bulle de vision) touche quelque chose
+    private void OnCollisionEnter(Collision collision)
+    {
+        // Si la chose qu'il touche a le tag "Player"
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Le joueur a été attrapé !");
+            
+            // On cherche notre GameManager dans la scène
+            GameOverManager manager = FindFirstObjectByType<GameOverManager>();
+            
+            // S'il le trouve, on lance la fonction fatale
+            if (manager != null)
+            {
+                manager.TriggerGameOver();
+            }
+        }
+    }
 }
