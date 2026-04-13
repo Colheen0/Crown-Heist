@@ -18,7 +18,7 @@ public class StealthPower : MonoBehaviour
         }
         else
         {
-            MessageManager.Instance.AfficherMessage("Brouilleur en recharge... Patiente !");
+            MessageManager.Instance.AfficherMessageBrouilleur("Brouilleur en recharge... Patiente !");
         }
     }
 
@@ -33,7 +33,7 @@ public class StealthPower : MonoBehaviour
     private IEnumerator SequenceStealth()
     {
         estDisponible = false;
-        MessageManager.Instance.AfficherMessage("BROUILLEUR ACTIVÉ ! Les flics sont aveugles.");
+        MessageManager.Instance.AfficherMessageBrouilleur("BROUILLEUR ACTIVÉ ! Les flics sont aveugles.");
 
         PoliceAI[] policiers = FindObjectsByType<PoliceAI>(FindObjectsSortMode.None);
         
@@ -52,7 +52,7 @@ public class StealthPower : MonoBehaviour
 
         yield return new WaitForSeconds(dureeInvisibilite);
 
-        MessageManager.Instance.AfficherMessage("Fin du brouilleur. Ils retrouvent la vue !");
+        MessageManager.Instance.AfficherMessageBrouilleur("Fin du brouilleur. Ils retrouvent la vue !");
         
         foreach (PoliceAI flic in policiers)
         {
@@ -66,11 +66,10 @@ public class StealthPower : MonoBehaviour
             }
         }
 
-        // 5. Temps de recharge
-        MessageManager.Instance.AfficherMessage("Recharge du brouilleur...");
+        MessageManager.Instance.AfficherMessageBrouilleur("Recharge du pouvoir...");
         yield return new WaitForSeconds(tempsCooldown);
 
         estDisponible = true;
-        MessageManager.Instance.AfficherMessage("Brouilleur prêt à l'emploi !");
+        MessageManager.Instance.AfficherMessageBrouilleur("Brouilleur : prêt");
     }
 }

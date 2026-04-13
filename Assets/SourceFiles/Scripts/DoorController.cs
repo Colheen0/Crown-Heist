@@ -33,7 +33,7 @@ public class DoorController : MonoBehaviour
         }
         else
         {
-            MessageManager.Instance.AfficherMessage("Pouvoir en recharge... Patiente !");
+            MessageManager.Instance.AfficherMessagePorte("Pouvoir en recharge... Patiente !");
         }
     }
 
@@ -52,21 +52,21 @@ public class DoorController : MonoBehaviour
         // CORRECTION : La porte va se lever à 1f (fermée). On bloque l'IA immédiatement.
         if (lienNavMesh != null) lienNavMesh.enabled = false;
 
-       MessageManager.Instance.AfficherMessage("Action lancée ! La porte se ferme.");
+       MessageManager.Instance.AfficherMessagePorte("Action lancée ! La porte se ferme.");
         yield return StartCoroutine(BougerVers(yAction));
 
         yield return new WaitForSeconds(dureePouvoir);
 
-        MessageManager.Instance.AfficherMessage("Fin de l'effet, la porte se rouvre...");
+        MessageManager.Instance.AfficherMessagePorte("Fin de l'effet, la porte se rouvre...");
         yield return StartCoroutine(BougerVers(yRepos));
 
         if (lienNavMesh != null) lienNavMesh.enabled = true;
 
-        MessageManager.Instance.AfficherMessage("Recharge du pouvoir...");
+        MessageManager.Instance.AfficherMessagePorte("Recharge du pouvoir...");
         yield return new WaitForSeconds(tempsCooldown);
 
         estDisponible = true;
-        MessageManager.Instance.AfficherMessage("Pouvoir prêt à l'emploi !");
+        MessageManager.Instance.AfficherMessagePorte("Portes : prêtes");
     }
 
     private IEnumerator BougerVers(float cibleY)

@@ -56,7 +56,7 @@ public class PoliceAI : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-           MessageManager.Instance.AfficherMessage("HALTE ! Le joueur est repéré !");
+           MessageManager.Instance.AfficherMessageGeneral("HALTE ! Le joueur est repéré !");
             _isChasing = true;               
             _targetPlayer = other.transform;
             _agent.speed = vitessePoursuite; 
@@ -66,7 +66,7 @@ public class PoliceAI : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-           MessageManager.Instance.AfficherMessage("On l'a perdu... Retour à la ronde.");
+            MessageManager.Instance.AfficherMessageGeneral("Le joueur a échappé aux flics !");
             _isChasing = false;              
             _targetPlayer = null;            
             _agent.speed = vitessePatrouille; 
@@ -82,7 +82,7 @@ public class PoliceAI : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            MessageManager.Instance.AfficherMessage("Le joueur a été attrapé !");
+            MessageManager.Instance.AfficherMessageGeneral("Le joueur a été attrapé !");
             
             GameOverManager manager = FindFirstObjectByType<GameOverManager>();
             

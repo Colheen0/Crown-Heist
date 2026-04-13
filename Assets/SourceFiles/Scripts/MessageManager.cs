@@ -1,16 +1,21 @@
 using UnityEngine;
-using TMPro; // Obligatoire pour utiliser TextMeshPro
-using System.Collections;
+using TMPro; 
+using UnityEngine.SceneManagement; 
 
 public class MessageManager : MonoBehaviour
 {
     public static MessageManager Instance; 
 
-    [Header("Interface")]
-    public TextMeshProUGUI texteNotification; 
+    [Header("Les Écrans de Texte")]
+    public TextMeshProUGUI texteGeneral;
+    public TextMeshProUGUI textePorte;
+    public TextMeshProUGUI texteBrouilleur;
+    
+    [Header("Le Score")]
+    public TextMeshProUGUI texteScore; 
+    private int scoreActuel = 0;
+    private int scoreMax = 7;
 
-    [Header("Réglages")]
-    public float tempsAffichage = 3f; 
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -19,21 +24,47 @@ public class MessageManager : MonoBehaviour
 
     void Start()
     {
-        if (texteNotification != null) texteNotification.text = "";
+        if (texteGeneral != null) texteGeneral.text = "";
+        if (textePorte != null) textePorte.text = "[ PORTES : PRÊTES ]";
+        if (texteBrouilleur != null) texteBrouilleur.text = "[ BROUILLEUR : PRÊT ]";
+        
+        MettreAJourScore();
     }
 
-    public void AfficherMessage(string nouveauMessage)
-    {
-        if (texteNotification == null) return;
 
-        StopAllCoroutines(); 
-        StartCoroutine(SequenceAffichage(nouveauMessage));
+    public void AjouterUnBijou()
+    {
+        scoreActuel++; 
+        MettreAJourScore();
+
+        if (scoreActuel >= scoreMax)
+        {
+           
+            SceneManager.LoadScene("Victoire"); 
+        }
     }
 
-    private IEnumerator SequenceAffichage(string message)
+    private void MettreAJourScore()
     {
-        texteNotification.text = message; 
-        yield return new WaitForSeconds(tempsAffichage); 
-        texteNotification.text = ""; 
+        if (texteScore != null)
+        {
+            texteScore.text = "BIJOUX VOLÉS : " + scoreActuel + " / " + scoreMax;
+        }
+    }
+
+
+    public void AfficherMessageGeneral(string message)
+    {
+        if (texteGeneral != null) texteGeneral.text = message;
+    }
+
+    public void AfficherMessagePorte(string message)
+    {
+        if (textePorte != null) textePorte.text = message;
+    }
+
+    public void AfficherMessageBrouilleur(string message)
+    {
+        if (texteBrouilleur != null) texteBrouilleur.text = message;
     }
 }
