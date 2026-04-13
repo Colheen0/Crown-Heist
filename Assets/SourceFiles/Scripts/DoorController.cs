@@ -1,21 +1,30 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using Unity.AI.Navigation; 
 
 public class DoorController : MonoBehaviour
 {
     [Header("Réglages des Hauteurs")]
-    public float yRepos = -2.5f;   // Position quand elle est FERMÉE
-    public float yAction = 2.5f;  // Position quand elle se LÈVE (Ouverte)
+    public float yRepos = -2f;   
+    public float yAction = 1f;  
 
     [Header("Timers du Pouvoir")]
     public float vitesse = 5f;
-    public float dureePouvoir = 5f;    // Temps où elle reste levée
-    public float tempsCooldown = 10f;  // Temps avant de pouvoir réutiliser
+    public float dureePouvoir = 5f;    
+    public float tempsCooldown = 10f;  
+
+    [Header("Le Lien NavMesh (Le pont invisible)")]
+    public NavMeshLink lienNavMesh; 
 
     private bool estDisponible = true;
 
-    // Cette fonction est celle que ton OSC_manager doit appeler
+    void Start()
+    {
+        // CORRECTION : À -2f, la porte est baissée (ouverte). Le passage est libre.
+        if (lienNavMesh != null) lienNavMesh.enabled = true;
+    }
+
     public void ToggleDoor()
     {
         if (estDisponible)
@@ -24,13 +33,12 @@ public class DoorController : MonoBehaviour
         }
         else
         {
-            Debug.Log("Pouvoir en recharge... Patiente !");
+            MessageManager.Instance.AfficherMessage("Pouvoir en recharge... Patiente !");
         }
     }
 
     void Update()
     {
-        // Touche P pour tester
         if (Keyboard.current.pKey.wasPressedThisFrame)
         {
             ToggleDoor();
@@ -39,32 +47,28 @@ public class DoorController : MonoBehaviour
 
     private IEnumerator SequenceDuPouvoir()
     {
-        // --- ÉTAPE 0 : VERROUILLAGE ---
         estDisponible = false; 
 
-        // --- ÉTAPE 1 : LA PORTE SE LÈVE ---
-        Debug.Log("Action lancée !");
+        // CORRECTION : La porte va se lever à 1f (fermée). On bloque l'IA immédiatement.
+        if (lienNavMesh != null) lienNavMesh.enabled = false;
+
+       MessageManager.Instance.AfficherMessage("Action lancée ! La porte se ferme.");
         yield return StartCoroutine(BougerVers(yAction));
 
-        // --- ÉTAPE 2 : ATTENTE (5 secondes) ---
-        // La porte reste en haut
         yield return new WaitForSeconds(dureePouvoir);
 
-        // --- ÉTAPE 3 : LA PORTE REDESCEND ---
-        Debug.Log("Fin de l'effet, retour au repos...");
+        MessageManager.Instance.AfficherMessage("Fin de l'effet, la porte se rouvre...");
         yield return StartCoroutine(BougerVers(yRepos));
 
-        // --- ÉTAPE 4 : COOLDOWN (10 secondes) ---
-        // La porte est en bas, mais le bouton ne marche pas encore
-        Debug.Log("Recharge du pouvoir...");
+        if (lienNavMesh != null) lienNavMesh.enabled = true;
+
+        MessageManager.Instance.AfficherMessage("Recharge du pouvoir...");
         yield return new WaitForSeconds(tempsCooldown);
 
-        // --- ÉTAPE 5 : PRÊT ---
         estDisponible = true;
-        Debug.Log("Pouvoir prêt à l'emploi !");
+        MessageManager.Instance.AfficherMessage("Pouvoir prêt à l'emploi !");
     }
 
-    // Fonction de mouvement fluide point A vers point B
     private IEnumerator BougerVers(float cibleY)
     {
         while (Mathf.Abs(transform.localPosition.y - cibleY) > 0.01f)
@@ -75,7 +79,6 @@ public class DoorController : MonoBehaviour
             yield return null;
         }
         
-        // On force la position exacte à la fin
         transform.localPosition = new Vector3(transform.localPosition.x, cibleY, transform.localPosition.z);
     }
 }
