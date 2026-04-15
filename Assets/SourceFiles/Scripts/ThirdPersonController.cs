@@ -146,7 +146,8 @@ public bool IsRespawning { get; set; } = false;
 {
     _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
 
-    _hasAnimator = TryGetComponent(out _animator);
+    _animator = GetComponentInChildren<Animator>();
+    _hasAnimator = _animator != null;
     _controller = GetComponent<CharacterController>();
     _input = GetComponent<StarterAssetsInputs>();
 #if ENABLE_INPUT_SYSTEM 
@@ -168,7 +169,8 @@ public bool IsRespawning { get; set; } = false;
 
         private void Update()
         {
-            _hasAnimator = TryGetComponent(out _animator);
+            _animator = GetComponentInChildren<Animator>();
+            _hasAnimator = _animator != null;
 
             JumpAndGravity();
             GroundedCheck();
@@ -427,7 +429,14 @@ public bool IsRespawning { get; set; } = false;
 
     Debug.Log($"Camera Yaw reset to {targetYaw} degrees.");
 }
-    }
 
+        public void LancerAnimationVol()
+        {
+            if (_hasAnimator)
+            {
+                _animator.SetTrigger("Vole");
+            }
+        }
+    }
     
 }

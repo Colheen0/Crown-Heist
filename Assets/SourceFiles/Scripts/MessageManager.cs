@@ -14,7 +14,7 @@ public class MessageManager : MonoBehaviour
     [Header("Le Score")]
     public TextMeshProUGUI texteScore; 
     private int scoreActuel = 0;
-    private int scoreMax = 7;
+    private int scoreMax = 8;
 
     private void Awake()
     {

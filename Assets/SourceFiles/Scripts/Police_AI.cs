@@ -14,12 +14,18 @@ public class PoliceAI : MonoBehaviour
     private bool _isChasing = false;    
 
     private NavMeshAgent _agent;
+    private Animator _animator;
+    private Transform _visualModel; // ⭐ Le modèle Guard
 
     void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
+        _animator = GetComponentInChildren<Animator>();
+        _visualModel = transform.GetChild(0); // ⭐ Premier enfant = Guard
+        
         _agent.autoBraking = false;
-        _agent.speed = vitessePatrouille; 
+        _agent.speed = vitessePatrouille;
+        _agent.updateRotation = false; // ⭐ Désactive rotation auto
 
         if (_agent.isOnNavMesh && waypoints.Length > 0)
         {
@@ -42,6 +48,21 @@ public class PoliceAI : MonoBehaviour
                 GoToNextPoint();
             }
         }
+        
+        // ⭐ ROTATION du modèle visuel vers direction mouvement
+        if (_agent.velocity.magnitude > 0.1f)
+        {
+            Vector3 direction = _agent.velocity.normalized;
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            _visualModel.rotation = Quaternion.Slerp(_visualModel.rotation, targetRotation, Time.deltaTime * 10f);
+        }
+        
+        // ⭐ ANIMATION seulement si vraiment en mouvement
+        if (_animator != null)
+        {
+            bool isMoving = _agent.velocity.magnitude > 0.5f; // Seuil plus haut ⭐
+            _animator.SetBool("isWalking", isMoving);
+        }
     }
 
     void GoToNextPoint()
@@ -62,6 +83,7 @@ public class PoliceAI : MonoBehaviour
             _agent.speed = vitessePoursuite; 
         }
     }
+    
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -92,13 +114,13 @@ public class PoliceAI : MonoBehaviour
             }
         }
     }
+    
     public void Forget()
     {
         _isChasing = false;       
         _targetPlayer = null;          
         _agent.speed = vitessePatrouille; 
         
-
         if (waypoints.Length > 0 && _agent.isOnNavMesh)
         {
             _agent.SetDestination(waypoints[_currentPointIndex].position);

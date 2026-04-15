@@ -22,7 +22,7 @@ public class JewelPickup : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             _joueurDansZone = false;
-            MessageManager.Instance.AfficherMessageGeneral(""); // On efface le texte
+            MessageManager.Instance.AfficherMessageGeneral(""); 
         }
     }
 
@@ -36,12 +36,16 @@ public class JewelPickup : MonoBehaviour
 
     private void VolerLeBijou()
     {
+        StarterAssets.ThirdPersonController joueur = FindFirstObjectByType<StarterAssets.ThirdPersonController>();
+        if (joueur != null)
+        {
+            joueur.LancerAnimationVol();
+        }
+
         MessageManager.Instance.AjouterUnBijou();
-        
         MessageManager.Instance.AfficherMessageGeneral("Bijou récupéré !");
         
         if (bijouVisuel != null) bijouVisuel.SetActive(false);
-        
         gameObject.SetActive(false); 
     }
 }
