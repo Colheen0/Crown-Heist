@@ -6,6 +6,10 @@ public class JewelPickup : MonoBehaviour
     [Tooltip("Glisse ici l'objet 3D du bijou (pour le faire disparaître)")]
     public GameObject bijouVisuel; 
 
+    [Header("Sons")]
+    [Tooltip("Glisse ici le fichier audio du ramassage")]
+    public AudioClip sonRamassage; // <- C'est cette ligne qui manquait !
+
     private bool _joueurDansZone = false;
 
     private void OnTriggerEnter(Collider other)
@@ -36,16 +40,27 @@ public class JewelPickup : MonoBehaviour
 
     private void VolerLeBijou()
     {
+        // 1. On lance l'animation sur le joueur
         StarterAssets.ThirdPersonController joueur = FindFirstObjectByType<StarterAssets.ThirdPersonController>();
         if (joueur != null)
         {
             joueur.LancerAnimationVol();
         }
 
+        // 2. On met à jour l'interface
         MessageManager.Instance.AjouterUnBijou();
         MessageManager.Instance.AfficherMessageGeneral("Bijou récupéré !");
         
-        if (bijouVisuel != null) bijouVisuel.SetActive(false);
+        if (sonRamassage != null)
+        {
+            AudioSource.PlayClipAtPoint(sonRamassage, transform.position);
+        }
+
+        if (bijouVisuel != null) 
+        {
+            bijouVisuel.SetActive(false);
+        }
+        
         gameObject.SetActive(false); 
     }
 }
