@@ -8,12 +8,18 @@ public class DoorController : MonoBehaviour
 
 //ici on renseigne les différentes stats de la portes pour pouvoir les modifier si besoin
     [Header("Réglages des Hauteurs")]
+//la position y de la porte quand elle est en position repos (ouverte)
     public float yRepos = -2f;   
+
+//la position y de la porte quand elle est en position action (fermée)
     public float yAction = 1f;  
 
     [Header("Timers du Pouvoir")]
+//la vitesse de déplacement de la porte
     public float vitesse = 5f;
-    public float dureePouvoir = 5f;    
+//la durée pendant laquelle la porte reste fermée après l'activation du pouvoir
+    public float dureePouvoir = 5f;   
+//le temps de recharge du pouvoir après son utilisation 
     public float tempsCooldown = 10f;  
 
 //ici on renseigne les navLinks de chaque duo de portes

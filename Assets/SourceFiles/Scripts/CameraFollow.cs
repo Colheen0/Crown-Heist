@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//code générer pour avoir une caméra qui fonctionnne normalement 
 public class MouseLook : MonoBehaviour
 {
     public float sensitivity = 100f;
