@@ -24,7 +24,7 @@ public class DoorController : MonoBehaviour
 //on créer une variable pour connaitre si le pouvoir est utilisable
     private bool estDisponible = true;
 
-//
+//ici on active bien les navlink dès le début 
     void Start()
     {
         if (lienNavMesh != null) lienNavMesh.enabled = true;

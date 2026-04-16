@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//c'est un code générer pour pouvoir faire bouger le joueur (c'était une galère de juste reprendre le robot de base et lui mettre un skin :( )
 public class PlayerMovement : MonoBehaviour
 {
     public float speed = 5f;

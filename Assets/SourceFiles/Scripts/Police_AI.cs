@@ -15,17 +15,17 @@ public class PoliceAI : MonoBehaviour
 
     private NavMeshAgent _agent;
     private Animator _animator;
-    private Transform _visualModel; // ⭐ Le modèle Guard
+    private Transform _visualModel; 
 
     void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
         _animator = GetComponentInChildren<Animator>();
-        _visualModel = transform.GetChild(0); // ⭐ Premier enfant = Guard
+        _visualModel = transform.GetChild(0); 
         
         _agent.autoBraking = false;
         _agent.speed = vitessePatrouille;
-        _agent.updateRotation = false; // ⭐ Désactive rotation auto
+        _agent.updateRotation = false; 
 
         if (_agent.isOnNavMesh && waypoints.Length > 0)
         {
@@ -49,7 +49,6 @@ public class PoliceAI : MonoBehaviour
             }
         }
         
-        // ⭐ ROTATION du modèle visuel vers direction mouvement
         if (_agent.velocity.magnitude > 0.1f)
         {
             Vector3 direction = _agent.velocity.normalized;
@@ -57,7 +56,6 @@ public class PoliceAI : MonoBehaviour
             _visualModel.rotation = Quaternion.Slerp(_visualModel.rotation, targetRotation, Time.deltaTime * 10f);
         }
         
-        // ⭐ ANIMATION seulement si vraiment en mouvement
         if (_animator != null)
         {
             bool isMoving = _agent.velocity.magnitude > 0.5f; // Seuil plus haut ⭐
